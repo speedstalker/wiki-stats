@@ -21,17 +21,17 @@ class WikiGraph:
 
         with open(filename, encoding='utf8') as f:
             initdesc = f.readline().split()
-            n = int(initdesc[0])
-            _nlinks = int(initdesc[1])
 
+            self._n = int(initdesc[0])
+            self._nlinks = int(initdesc[1])
+            
             self._titles = []
-            self._n = n
-            self._sizes = array.array('L', [0]*n)
-            self._links = array.array('L', [0]*_nlinks)
-            self._redirect = array.array('B', [0]*n)
-            self._offset = array.array('L', [0]*(n+1))
+            self._sizes = array.array('L', [0]*self._n)
+            self._links = array.array('L', [0]*self._nlinks)
+            self._redirect = array.array('B', [0]*self._n)
+            self._offset = array.array('L', [0]*(self._n+1))
 
-            for i in range(n):
+            for i in range(self._n):
                 title = f.readline()
                 titledesc = f.readline().split()
 
@@ -70,19 +70,3 @@ class WikiGraph:
 def hist(fname, data, bins, xlabel, ylabel, title, facecolor='green', alpha=0.5, transparent=True, **kwargs):
     plt.clf()
     # TODO: нарисовать гистограмму и сохранить в файл
-
-
-if __name__ == '__main__':
-
-    if len(sys.argv) != 2:
-        print('Использование: wiki_stats.py <файл с графом статей>')
-        sys.exit(-1)
-
-    if not os.path.isfile(sys.argv[1]):
-        print('Файл с графом не найден')
-        sys.exit(-1)
-
-    wg = WikiGraph()
-    wg.load_from_file(sys.argv[1])
-
-    # TODO: статистика и гистограммы
