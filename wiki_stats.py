@@ -45,25 +45,25 @@ class WikiGraph:
         print('Граф загружен')
 
     def get_number_of_links_from(self, _id):
-        pass
+        return self._offset[_id + 1] - self._offset[_id]
 
     def get_links_from(self, _id):
-        pass
+        return self._links[self._offset[_id]:self._offset[_id + 1]]
 
     def get_id(self, title):
-        pass
+        return self._titles.index(title)
 
     def get_number_of_pages(self):
-        pass
+        return self._n
 
     def is_redirect(self, _id):
-        pass
+        return self._redirect[_id]
 
     def get_title(self, _id):
-        pass
+        return self._titles[_id]
 
     def get_page_size(self, _id):
-        pass
+        return self._pagesize[_id]
 
 
 def hist(fname, data, bins, xlabel, ylabel, title, facecolor='green', alpha=0.5, transparent=True, **kwargs):
@@ -77,11 +77,11 @@ if __name__ == '__main__':
         print('Использование: wiki_stats.py <файл с графом статей>')
         sys.exit(-1)
 
-    if os.path.isfile(sys.argv[1]):
-        wg = WikiGraph()
-        wg.load_from_file(sys.argv[1])
-    else:
+    if not os.path.isfile(sys.argv[1]):
         print('Файл с графом не найден')
         sys.exit(-1)
+
+    wg = WikiGraph()
+    wg.load_from_file(sys.argv[1])
 
     # TODO: статистика и гистограммы
