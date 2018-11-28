@@ -9,7 +9,7 @@ import array
 import statistics
 
 from matplotlib import rc
-rc('font', family='Droid Sans', weight='normal', size=14)
+#rc('font', family='Droid Sans', weight='normal', size=14)
 
 import matplotlib.pyplot as plt
 
@@ -19,8 +19,10 @@ class WikiGraph:
     def load_from_file(self, filename):
         print('Загружаю граф из файла: ' + filename)
 
-        with open(filename) as f:
-            (n, _nlinks) = (0, 0) # TODO: прочитать из файла
+        with open(filename, encoding='utf8') as f:
+            initdesc = f.readline().split()
+            n = int(initdesc[0])
+            _nlinks = int(initdesc[1])
             
             self._titles = []
             self._sizes = array.array('L', [0]*n)
@@ -28,7 +30,17 @@ class WikiGraph:
             self._redirect = array.array('B', [0]*n)
             self._offset = array.array('L', [0]*(n+1))
 
-            # TODO: прочитать граф из файла
+            for i in range(n):
+                title = f.readline()
+                titledesc = f.readline().split()
+
+                self._titles.append(title.strip())
+
+                self._sizes[i]    = int(titledesc[0])
+                self._redirect[i] = int(titledesc[1])
+                self._offset[i+1] = self._offset[i] + int(titledesc[2])
+                for j in range(self._offset[i], self._offset[i+1]):
+                    self._links.append(int(f.readline()))
 
         print('Граф загружен')
 
