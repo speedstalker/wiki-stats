@@ -23,8 +23,9 @@ class WikiGraph:
             initdesc = f.readline().split()
             n = int(initdesc[0])
             _nlinks = int(initdesc[1])
-            
+
             self._titles = []
+            self._n = n
             self._sizes = array.array('L', [0]*n)
             self._links = array.array('L', [0]*_nlinks)
             self._redirect = array.array('B', [0]*n)
