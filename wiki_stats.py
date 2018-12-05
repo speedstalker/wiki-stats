@@ -27,7 +27,7 @@ class WikiGraph:
             
             self._titles = []
             self._sizes = array.array('L', [0]*self._n)
-            self._links = array.array('L', [0]*self._nlinks)
+            self._links = array.array('L', [])
             self._redirect = array.array('B', [0]*self._n)
             self._offset = array.array('L', [0]*(self._n+1))
 
