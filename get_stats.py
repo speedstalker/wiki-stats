@@ -22,11 +22,13 @@ def get_array_stats(wg, arr):
     stats['maxval']   = max(arr)
     stats['maxcount'] = arr.count(stats['maxval'])
     maxindex          = arr.index(stats['maxval'])
+    stats['maxindex'] = maxindex
     stats['maxtitle'] = wg.get_title(maxindex)
 
     stats['minval']   = min(arr)
     stats['mincount'] = arr.count(stats['minval'])
     minindex          = arr.index(stats['minval'])
+    stats['minindex'] = minindex
     stats['mintitle'] = wg.get_title(minindex)
 
     return stats
@@ -53,17 +55,28 @@ def get_redirects_to_stats(wg):
             for link in links:
                 redirectsto[link] += 1
 
+
+
     return get_array_stats(wg, redirectsto)
 
 def get_stats(wg):
-    print("Redirect percentage: ", get_redirect_percentage(wg) * 100, "%\n")
+    print("Redirect percentage: ", get_redirect_percentage(wg) * 100)
 
     linksfrom   = get_links_from_stats(wg)
     linksto     = get_links_to_stats(wg)
     redirectsto = get_redirects_to_stats(wg)
 
-    print("Количество статей с максимальным количеством внешних ссылок: ", linksfrom['maxcount'])
-    print("Статья с наибольшим количеством внешних ссылок: ", linksfrom['maxtitle'])
+    print("Минимальное количество ссылок из статьи: ", linksfrom['minval'])
+    print("Количество статей с минимальным количеством ссылок: ", linksfrom['mincount'])
+    print("Максимальное количество ссылок из статьи: ", linksfrom['maxval'])
+    print("Количество статей с максимальным количеством ссылок: ", linksfrom['maxcount'])
+    print("Статья с наибольшим количеством ссылок: ", linksfrom['maxtitle'])
+    print("Среднее количество ссылок в статье: ", linksfrom['avg'])
+    print("Минимальное количество ссылок на статью: ", linksto['minval'])
+    print("Количество статей с минимальным количеством внешних ссылок: ", linksto['mincount'])
+    print("Максимальное количество ссылок на статью: ", linksto['maxval'])
+    print("Количество статей с максимальным количеством внешних ссылок: ", linksto['maxcount'])
+    print("Статья с наибольшим количеством внешних ссылок: ", linksto['maxtitle'])
     print("Среднее количество внешних ссылок на статью: ", linksto['avg'])
     print("Минимальное количество перенаправлений на статью: ", redirectsto['minval'])
     print("Количество статей с минимальным количеством внешних перенаправлений: ", redirectsto['mincount'])
