@@ -24,7 +24,7 @@ class WikiGraph:
 
             self._n = int(initdesc[0])
             self._nlinks = int(initdesc[1])
-            
+
             self._titles = []
             self._sizes = array.array('L', [0]*self._n)
             self._links = array.array('L', [])

@@ -24,7 +24,7 @@ def get_array_stats(wg, arr):
     maxindex          = arr.index(stats['maxval'])
     stats['maxindex'] = maxindex
     stats['maxtitle'] = wg.get_title(maxindex)
-    
+
     stats['minval']   = min(arr)
     stats['mincount'] = arr.count(stats['minval'])
     minindex          = arr.index(stats['minval'])
@@ -65,10 +65,6 @@ def get_stats(wg):
     linksfrom   = get_links_from_stats(wg)
     linksto     = get_links_to_stats(wg)
     redirectsto = get_redirects_to_stats(wg)
-
-    print("Links To", linksto)
-    print("Links From", linksfrom)
-    print("Redirects To", redirectsto)
 
     print("Минимальное количество ссылок из статьи: ", linksfrom['minval'])
     print("Количество статей с минимальным количеством ссылок: ", linksfrom['mincount'])
