@@ -27,7 +27,7 @@ class WikiGraph:
 
             self._titles = []
             self._sizes = array.array('L', [0]*self._n)
-            self._links = array.array('L', [])
+            self._links = array.array('L', [0]*self._nlinks)
             self._redirect = array.array('B', [0]*self._n)
             self._offset = array.array('L', [0]*(self._n+1))
 
@@ -41,7 +41,7 @@ class WikiGraph:
                 self._redirect[i] = int(titledesc[1])
                 self._offset[i+1] = self._offset[i] + int(titledesc[2])
                 for j in range(self._offset[i], self._offset[i+1]):
-                    self._links.append(int(f.readline()))
+                    self._links[j] = int(f.readline())
 
         print('Граф загружен')
 
