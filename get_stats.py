@@ -99,3 +99,4 @@ if __name__ == '__main__':
     wg.load_from_file(sys.argv[1])
 
     get_stats(wg)
+    wg.draw_images()
